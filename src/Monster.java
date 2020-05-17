@@ -1,12 +1,7 @@
 import java.awt.*;
 
-public class Monster {
-    String name;
-    double health;
-    double attackPower;
-    double defensePower;
-    String race;
-    String skinColor;
+public class Monster extends Alive {
+
     //Constructor
      public Monster(String inputName,
                     double inputHealth,
