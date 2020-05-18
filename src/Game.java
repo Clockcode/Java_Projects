@@ -1,15 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Game {
     JFrame window;
     Container cont;
-    JPanel titlePanel, startButtonPanel;
+    JPanel titlePanel, startButtonPanel, mainTextPanel;
     JLabel titleLabel;
     JButton startButton;
+    JTextArea mainTextArea;
     Font titleFont = new Font("Times New Roman", Font.PLAIN, 40);
     Font startFont = new Font("Times New Roman", Font.PLAIN, 20);
-    
+    TitleScreenHandler titleSHandler = new TitleScreenHandler();
     public Game(){
 
         //Title Panel
@@ -33,6 +36,7 @@ public class Game {
         startButton.setForeground(Color.white);
         startButton.setBackground(Color.black);
         startButton.setFont(startFont);
+        startButton.addActionListener(titleSHandler);
         startButtonPanel.add(startButton);
 
         //Window
@@ -48,6 +52,30 @@ public class Game {
         cont.add(startButtonPanel);
         //Without this line you can not see the screen
         window.setVisible(true);
+    }
+
+    public void createGameScreen(){
+        //Without disabling current pannels next panel won't be visible
+        titlePanel.setVisible(false);
+        startButtonPanel.setVisible(false);
+        mainTextPanel = new JPanel();
+        mainTextPanel.setBounds(50,90,400,120);
+        mainTextPanel.setBackground(Color.black);
+        cont.add(mainTextPanel);
+
+        mainTextArea = new JTextArea();
+        mainTextArea.setBounds(50,90,400,120);
+        mainTextArea.setBackground(Color.black);
+        mainTextArea.setForeground(Color.white);
+        mainTextArea.setFont(startFont);
+        mainTextArea.setLineWrap(true);
+        mainTextPanel.add(mainTextArea);
+    }
+
+    public class TitleScreenHandler implements ActionListener {
+        public void actionPerformed(ActionEvent event){
+            createGameScreen();
+        }
     }
     public static void main(String[] args) {
         new Game();
